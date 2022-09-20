@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main) cunado se utiliza el binding ya no es necesario esta parte
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         movie = Movie("Avengers: End Game", 4)
@@ -20,15 +20,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun iniciarDescarga(){
         binding.txtDescarga.text = "Iniciando Descarga"
-        Thread.sleep(8000)
+        //Thread.sleep(8000)
         binding.txtDescarga.text = "Descarga Finalizando"
         binding.txtEjecucion.text = movie.play()
 
     }
     private fun iniciarHilo(){
         //los Threads trabajan con objetos llamados Runnable
-        //Runnable: interfaz
-        val hilo=Thread()
+        //Runnable: interfaz anonima.. que existe que implemente
+        //una regla del juego llamada run()
+        //run-- contiene todas las instrucciones que van a ejecutar
+        //en esegundo plano
+        val hilo=Thread(Runnable {
+            try {
+                Thread.sleep(8000)
+            }catch (e:InterruptedException){
+                e.printStackTrace()
+            }
+        })
     }
 
 }
