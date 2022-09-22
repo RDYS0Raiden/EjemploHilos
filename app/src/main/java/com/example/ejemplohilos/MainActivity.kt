@@ -15,17 +15,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         movie = Movie("Avengers: End Game", 4)
-        binding.btnIniciar.setOnClickListener { iniciarDescarga() }
+        binding.btnIniciar.setOnClickListener { iniciarDescarga()
+        iniciarHilo()
+        }
+
     }
 
     private fun iniciarDescarga(){
-        binding.txtDescarga.text = "Iniciando Descarga"
+
         //Thread.sleep(8000)
-        binding.txtDescarga.text = "Descarga Finalizando"
+
         binding.txtEjecucion.text = movie.play()
 
     }
     private fun iniciarHilo(){
+        binding.txtDescarga.text = "Iniciando Descarga"
+
         //los Threads trabajan con objetos llamados Runnable
         //Runnable: interfaz anonima.. que existe que implemente
         //una regla del juego llamada run()
@@ -34,10 +39,12 @@ class MainActivity : AppCompatActivity() {
         val hilo=Thread(Runnable {
             try {
                 Thread.sleep(8000)
+                binding.txtDescarga.text = "Descarga Finalizando"
             }catch (e:InterruptedException){
                 e.printStackTrace()
             }
         })
+        hilo.start()
     }
 
 }
