@@ -39,11 +39,15 @@ class MainActivity : AppCompatActivity() {
         val hilo=Thread(Runnable {
             try {
                 Thread.sleep(8000)
+                //si quieres hablar con la interfaz de usuario
+                //desde un hilo paralelo tienes que hacerlo o
+                //con un handler o usando un metodo llamando runOnUiThread
                 binding.txtDescarga.text = "Descarga Finalizando"
             }catch (e:InterruptedException){
                 e.printStackTrace()
             }
         })
+        //arrancar el hilo
         hilo.start()
     }
 
