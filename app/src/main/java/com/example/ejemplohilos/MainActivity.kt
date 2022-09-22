@@ -42,7 +42,9 @@ class MainActivity : AppCompatActivity() {
                 //si quieres hablar con la interfaz de usuario
                 //desde un hilo paralelo tienes que hacerlo o
                 //con un handler o usando un metodo llamando runOnUiThread
+                runOnUiThread {
                 binding.txtDescarga.text = "Descarga Finalizando"
+            }
             }catch (e:InterruptedException){
                 e.printStackTrace()
             }
